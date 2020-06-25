@@ -172,7 +172,6 @@ Please see the [Contribution Guide](./CONTRIBUTING.md).
 <td><img src="https://c10.patreonusercontent.com/3/eyJ3IjoyMDB9/patreon-media/p/user/13737140/1adf7835017d479280d90fe8d30aade2/1.png?token-time=2145916800&token-hash=0pdle8h5pDZrww0BDOjdz6zO-HudeGTh36a3qi1biVU%3D" alt="Satsuki Yanagi" width="100"></td>
 <td><img src="https://c10.patreonusercontent.com/3/eyJ3IjoyMDB9/patreon-media/p/user/17880724/311738c8a48f4a6b9443c2445a75adde/1.jpg?token-time=2145916800&token-hash=nVAntpybQrznE0rg05keLrSE6ogPKJXB13rmrJng42c%3D" alt="takimura " width="100"></td>
 <td><img src="https://c10.patreonusercontent.com/3/eyJ3IjoyMDB9/patreon-media/p/user/13100201/fc5be4fa90444f09a9c8a06f72385272/1.png?token-time=2145916800&token-hash=i8PjlgfOB2LPEdbtWyx8ZPsBKhGcNZqcw_FQmH71UGU%3D" alt="aqz tamaina" width="100"></td>
-<td><img src="https://c10.patreonusercontent.com/3/eyJ3IjoyMDB9/patreon-media/p/user/28295158/cd2451bfb94a449dbf705ef4718cd355/2.jpeg?token-time=2145916800&token-hash=MRv3BxufHPuCyiBSxU5UYmLGvD6YZlhtSFRfMWg2k4U%3D" alt="012 " width="100"></td>
 <td><img src="https://c10.patreonusercontent.com/3/eyJ3IjoyMDB9/patreon-media/p/user/9109588/e3cffc48d20a4e43afe04123e696781d/3.png?token-time=2145916800&token-hash=T_VIUA0IFIbleZv4pIjiszZGnQonwn34sLCYFIhakBo%3D" alt="nafuchoco " width="100"></td>
 <td><img src="https://c10.patreonusercontent.com/3/eyJ3IjoyMDB9/patreon-media/p/user/16900731/619ab87cc08448439222631ebb26802f/1.gif?token-time=2145916800&token-hash=o27K7M02s1z-LkDUEO5Oa7cu-GviRXeOXxryi4o_6VU%3D" alt="Atsuko Tominaga" width="100"></td>
 <td><img src="https://c10.patreonusercontent.com/3/eyJ3IjoyMDB9/patreon-media/p/user/4389829/9f709180ac714651a70f74a82f3ffdb9/3.png?token-time=2145916800&token-hash=FTm3WVom4dJ9NwWMU4OpCL_8Yc13WiwEbKrDPyTZTPs%3D" alt="natalie " width="100"></td>
@@ -185,7 +184,6 @@ Please see the [Contribution Guide](./CONTRIBUTING.md).
 <td><a href="https://www.patreon.com/user?u=13737140">Satsuki Yanagi</a></td>
 <td><a href="https://www.patreon.com/takimura">takimura </a></td>
 <td><a href="https://www.patreon.com/aqz">aqz tamaina</a></td>
-<td><a href="https://www.patreon.com/user?u=28295158">012 </a></td>
 <td><a href="https://www.patreon.com/nijimiss">nafuchoco </a></td>
 <td><a href="https://www.patreon.com/user?u=16900731">Atsuko Tominaga</a></td>
 <td><a href="https://www.patreon.com/user?u=4389829">natalie </a></td>
@@ -208,7 +206,7 @@ Please see the [Contribution Guide](./CONTRIBUTING.md).
 <td><a href="https://www.patreon.com/user?u=12531784">Takashi Shibuya</a></td>
 </tr></table>
 
-**Last updated:** Tue, 02 Jun 2020 00:00:08 UTC
+**Last updated:** Thu, 25 Jun 2020 01:00:11 UTC
 <!-- PATREON_END -->
 
 [backer-url]: #backers
