@@ -4,24 +4,25 @@
 	:class="{ reacted: note.myReaction == reaction, canToggle }"
 	@click="toggleReaction(reaction)"
 	v-if="count > 0"
-	@touchstart="onMouseover"
+	@touchstart.passive="onMouseover"
 	@mouseover="onMouseover"
 	@mouseleave="onMouseleave"
 	@touchend="onMouseleave"
 	ref="reaction"
 	v-particle="canToggle"
 >
-	<x-reaction-icon :reaction="reaction" :custom-emojis="note.emojis" ref="icon"/>
+	<XReactionIcon :reaction="reaction" :custom-emojis="note.emojis"/>
 	<span>{{ count }}</span>
 </button>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import XDetails from './reactions-viewer.details.vue';
-import XReactionIcon from './reaction-icon.vue';
+import { defineComponent, ref } from 'vue';
+import XDetails from '@/components/reactions-viewer.details.vue';
+import XReactionIcon from '@/components/reaction-icon.vue';
+import * as os from '@/os';
 
-export default Vue.extend({
+export default defineComponent({
 	components: {
 		XReactionIcon
 	},
@@ -45,23 +46,20 @@ export default Vue.extend({
 	},
 	data() {
 		return {
-			details: null,
+			close: null,
 			detailsTimeoutId: null,
 			isHovering: false
 		};
 	},
 	computed: {
-		isMe(): boolean {
-			return this.$store.getters.isSignedIn && this.$store.state.i.id === this.note.userId;
-		},
 		canToggle(): boolean {
-			return !this.reaction.match(/@\w/) && !this.isMe && this.$store.getters.isSignedIn;
+			return !this.reaction.match(/@\w/) && this.$store.getters.isSignedIn;
 		},
 	},
 	watch: {
 		count(newCount, oldCount) {
 			if (oldCount < newCount) this.anime();
-			if (this.details != null) this.openDetails();
+			if (this.close != null) this.openDetails();
 		},
 	},
 	mounted() {
@@ -73,18 +71,18 @@ export default Vue.extend({
 
 			const oldReaction = this.note.myReaction;
 			if (oldReaction) {
-				this.$root.api('notes/reactions/delete', {
+				os.api('notes/reactions/delete', {
 					noteId: this.note.id
 				}).then(() => {
 					if (oldReaction !== this.reaction) {
-						this.$root.api('notes/reactions/create', {
+						os.api('notes/reactions/create', {
 							noteId: this.note.id,
 							reaction: this.reaction
 						});
 					}
 				});
 			} else {
-				this.$root.api('notes/reactions/create', {
+				os.api('notes/reactions/create', {
 					noteId: this.note.id,
 					reaction: this.reaction
 				});
@@ -102,7 +100,7 @@ export default Vue.extend({
 			this.closeDetails();
 		},
 		openDetails() {
-			this.$root.api('notes/reactions', {
+			os.api('notes/reactions', {
 				noteId: this.note.id,
 				type: this.reaction,
 				limit: 11
@@ -113,18 +111,26 @@ export default Vue.extend({
 
 				this.closeDetails();
 				if (!this.isHovering) return;
-				this.details = this.$root.new(XDetails, {
+
+				const showing = ref(true);
+				os.popup(XDetails, {
+					showing,
 					reaction: this.reaction,
+					emojis: this.note.emojis,
 					users,
 					count: this.count,
 					source: this.$refs.reaction
-				});
+				}, {}, 'closed');
+
+				this.close = () => {
+					showing.value = false;
+				};
 			});
 		},
 		closeDetails() {
-			if (this.details != null) {
-				this.details.close();
-				this.details = null;
+			if (this.close != null) {
+				this.close();
+				this.close = null;
 			}
 		},
 		anime() {

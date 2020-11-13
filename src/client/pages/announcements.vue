@@ -1,36 +1,28 @@
 <template>
-<div>
-	<portal to="icon"><fa :icon="faBroadcastTower"/></portal>
-	<portal to="title">{{ $t('announcements') }}</portal>
-
-	<mk-pagination :pagination="pagination" #default="{items}" class="ruryvtyk" ref="list">
-		<section class="_card announcement" v-for="(announcement, i) in items" :key="announcement.id">
+<div class="_section">
+	<MkPagination :pagination="pagination" #default="{items}" class="ruryvtyk _content" ref="list">
+		<section class="_card announcement _vMargin" v-for="(announcement, i) in items" :key="announcement.id">
 			<div class="_title"><span v-if="$store.getters.isSignedIn && !announcement.isRead">🆕 </span>{{ announcement.title }}</div>
 			<div class="_content">
-				<mfm :text="announcement.text"/>
+				<Mfm :text="announcement.text"/>
 				<img v-if="announcement.imageUrl" :src="announcement.imageUrl"/>
 			</div>
 			<div class="_footer" v-if="$store.getters.isSignedIn && !announcement.isRead">
-				<mk-button @click="read(announcement)" primary><fa :icon="faCheck"/> {{ $t('gotIt') }}</mk-button>
+				<MkButton @click="read(items, announcement, i)" primary><Fa :icon="faCheck"/> {{ $t('gotIt') }}</MkButton>
 			</div>
 		</section>
-	</mk-pagination>
+	</MkPagination>
 </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import { faCheck, faBroadcastTower } from '@fortawesome/free-solid-svg-icons';
-import MkPagination from '../components/ui/pagination.vue';
-import MkButton from '../components/ui/button.vue';
+import MkPagination from '@/components/ui/pagination.vue';
+import MkButton from '@/components/ui/button.vue';
+import * as os from '@/os';
 
-export default Vue.extend({
-	metaInfo() {
-		return {
-			title: this.$t('announcements') as string
-		};
-	},
-
+export default defineComponent({
 	components: {
 		MkPagination,
 		MkButton
@@ -38,18 +30,26 @@ export default Vue.extend({
 
 	data() {
 		return {
+			INFO: {
+				title: this.$t('announcements'),
+				icon: faBroadcastTower
+			},
 			pagination: {
 				endpoint: 'announcements',
 				limit: 10,
 			},
-			faCheck, faBroadcastTower
+			faCheck,
 		};
 	},
 
 	methods: {
-		read(announcement) {
-			announcement.isRead = true;
-			this.$root.api('i/read-announcement', { announcementId: announcement.id });
+		// TODO: これは実質的に親コンポーネントから子コンポーネントのプロパティを変更してるのでなんとかしたい
+		read(items, announcement, i) {
+			items[i] = {
+				...announcement,
+				isRead: true,
+			};
+			os.api('i/read-announcement', { announcementId: announcement.id });
 		},
 	}
 });
